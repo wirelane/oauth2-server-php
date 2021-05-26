@@ -15,6 +15,7 @@
     "autoload": {
         "psr-0": { "OAuth2": "src/" }
     },
+    "minimum-stability": "dev",
     "require":{
         "php":">=7.2"
     },
