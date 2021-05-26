@@ -140,18 +140,18 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @param int $statusCode
-     * @param string $text
      * @throws InvalidArgumentException
      */
-    public function setStatusCode($statusCode, $text = null)
+    public function setStatusCode(int $statusCode, $text = null): object
     {
-        $this->statusCode = (int) $statusCode;
+        $this->statusCode = $statusCode;
         if ($this->isInvalid()) {
             throw new InvalidArgumentException(sprintf('The HTTP status code "%s" is not valid.', $statusCode));
         }
 
         $this->statusText = false === $text ? '' : (null === $text ? self::$statusTexts[$this->statusCode] : $text);
+
+        return $this;
     }
 
     /**

@@ -10,19 +10,10 @@ namespace OAuth2;
  */
 interface ResponseInterface
 {
-    /**
-     * @param array $parameters
-     */
     public function addParameters(array $parameters);
 
-    /**
-     * @param array $httpHeaders
-     */
     public function addHttpHeaders(array $httpHeaders);
 
-    /**
-     * @param int $statusCode
-     */
     public function setStatusCode(int $statusCode): object;
 
     /**
