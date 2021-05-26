@@ -26,6 +26,7 @@
         "thobbs/phpcassa": "dev-master",
         "mongodb/mongodb": "^1.1"
     },
+    "minimum-stability": "dev",
     "suggest": {
         "predis/predis": "Required to use Redis storage",
         "thobbs/phpcassa": "Required to use Cassandra storage",
