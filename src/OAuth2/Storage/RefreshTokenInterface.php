@@ -57,10 +57,12 @@ interface RefreshTokenInterface
      * Expiration timestamp to be stored. 0 if the token doesn't expire.
      * @param $scope
      * (optional) Scopes to be stored in space-separated string.
+     * @param $rfid
+     * (optional) if logged in with a rfid card number/password, the number will be stored to identify the customers card
      *
      * @ingroup oauth2_section_6
      */
-    public function setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope = null);
+    public function setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope = null, $rfid = null);
 
     /**
      * Expire a used refresh token.

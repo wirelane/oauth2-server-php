@@ -64,13 +64,17 @@ class AccessToken implements AccessTokenInterface
 
         $params += array('scope' => null, 'state' => null);
 
+        if (!isset($params['rfid'])) {
+            $params['rfid'] = null;
+        }
+
         /*
          * a refresh token MUST NOT be included in the fragment
          *
          * @see http://tools.ietf.org/html/rfc6749#section-4.2.2
          */
         $includeRefreshToken = false;
-        $result["fragment"] = $this->createAccessToken($params['client_id'], $user_id, $params['scope'], $includeRefreshToken);
+        $result["fragment"] = $this->createAccessToken($params['client_id'], $user_id, $params['scope'], $includeRefreshToken, $params['rfid']);
 
         if (isset($params['state'])) {
             $result["fragment"]["state"] = $params['state'];
@@ -91,7 +95,7 @@ class AccessToken implements AccessTokenInterface
      * @see http://tools.ietf.org/html/rfc6749#section-5
      * @ingroup oauth2_section_5
      */
-    public function createAccessToken($client_id, $user_id, $scope = null, $includeRefreshToken = true)
+    public function createAccessToken($client_id, $user_id, $scope = null, $includeRefreshToken = true, $rfid = null)
     {
         $token = array(
             "access_token" => $this->generateAccessToken(),
@@ -114,7 +118,7 @@ class AccessToken implements AccessTokenInterface
             if ($this->config['refresh_token_lifetime'] > 0) {
                 $expires = time() + $this->config['refresh_token_lifetime'];
             }
-            $this->refreshStorage->setRefreshToken($token['refresh_token'], $client_id, $user_id, $expires, $scope);
+            $this->refreshStorage->setRefreshToken($token['refresh_token'], $client_id, $user_id, $expires, $scope, $rfid);
         }
 
         return $token;

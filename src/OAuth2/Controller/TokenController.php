@@ -248,7 +248,7 @@ class TokenController implements TokenControllerInterface
             $requestedScope = $defaultScope;
         }
 
-        return $grantType->createAccessToken($this->accessToken, $clientId, $grantType->getUserId(), $requestedScope);
+        return $grantType->createAccessToken($this->accessToken, $clientId, $grantType->getUserId(), $requestedScope, $rfid);
     }
 
     /**

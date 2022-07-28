@@ -235,14 +235,15 @@ class CouchbaseDB implements AuthorizationCodeInterface,
         return is_null($token) ? false : $token;
     }
 
-    public function setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope = null)
+    public function setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope = null, $rfid = null)
     {
         $this->setObjectByType('refresh_token_table',$refresh_token, array(
             'refresh_token' => $refresh_token,
             'client_id' => $client_id,
             'user_id' => $user_id,
             'expires' => $expires,
-            'scope' => $scope
+            'scope' => $scope,
+            'rfid' => $rfid
         ));
 
         return true;

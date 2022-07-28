@@ -399,14 +399,17 @@ class Pdo implements
      * @param string $scope
      * @return bool
      */
-    public function setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope = null)
+    public function setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope = null, $rfid = null)
     {
         // convert expires to datestring
         $expires = date('Y-m-d H:i:s', $expires);
 
-        $stmt = $this->db->prepare(sprintf('INSERT INTO %s (refresh_token, client_id, user_id, expires, scope) VALUES (:refresh_token, :client_id, :user_id, :expires, :scope)', $this->config['refresh_token_table']));
+        $stmt = $this->db->prepare(sprintf(
+            'INSERT INTO %s (refresh_token, client_id, user_id, expires, scope, rfid) VALUES (:refresh_token, :client_id, :user_id, :expires, :scope, :rfid)',
+            $this->config['refresh_token_table']
+        ));
 
-        return $stmt->execute(compact('refresh_token', 'client_id', 'user_id', 'expires', 'scope'));
+        return $stmt->execute(compact('refresh_token', 'client_id', 'user_id', 'expires', 'scope', 'rfid'));
     }
 
     /**
@@ -685,6 +688,7 @@ class Pdo implements
               user_id             VARCHAR(80),
               expires             TIMESTAMP      NOT NULL,
               scope               VARCHAR(4000),
+              rfid                VARCHAR(50),
               PRIMARY KEY (refresh_token)
             );
 

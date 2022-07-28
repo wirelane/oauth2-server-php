@@ -314,12 +314,12 @@ class DynamoDB implements
         return $token;
     }
 
-    public function setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope = null)
+    public function setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope = null, $rfid = null)
     {
         // convert expires to datestring
         $expires = date('Y-m-d H:i:s', $expires);
 
-        $clientData = compact('refresh_token', 'client_id', 'user_id', 'expires', 'scope');
+        $clientData = compact('refresh_token', 'client_id', 'user_id', 'expires', 'scope', 'rfid');
         $clientData = array_filter($clientData, 'self::isNotEmpty');
 
         $result = $this->client->putItem(array(

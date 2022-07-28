@@ -19,7 +19,7 @@ class RefreshTokenTest extends BaseTest
 
         // add new token
         $expires = time() + 20;
-        $success = $storage->setRefreshToken('refreshtoken', 'client ID', 'SOMEUSERID', $expires);
+        $success = $storage->setRefreshToken('refreshtoken', 'client ID', 'SOMEUSERID', $expires, '123123123');
         $this->assertTrue($success);
 
         $token = $storage->getRefreshToken('refreshtoken');
@@ -35,7 +35,7 @@ class RefreshTokenTest extends BaseTest
 
         // add token with scope having an empty string value
         $expires = time() + 20;
-        $success = $storage->setRefreshToken('refreshtoken2', 'client ID', 'SOMEUSERID', $expires, '');
+        $success = $storage->setRefreshToken('refreshtoken2', 'client ID', 'SOMEUSERID', $expires, '', '123123123');
         $this->assertTrue($success);
     }
 }

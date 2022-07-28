@@ -375,11 +375,11 @@ class Cassandra implements AuthorizationCodeInterface,
      * @param null $scope
      * @return bool
      */
-    public function setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope = null)
+    public function setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope = null, $rfid = null)
     {
         return $this->setValue(
             $this->config['refresh_token_key'] . $refresh_token,
-            compact('refresh_token', 'client_id', 'user_id', 'expires', 'scope'),
+            compact('refresh_token', 'client_id', 'user_id', 'expires', 'scope', 'rfid'),
             $expires
         );
     }

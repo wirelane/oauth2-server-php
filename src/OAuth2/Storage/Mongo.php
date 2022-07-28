@@ -244,14 +244,15 @@ class Mongo implements AuthorizationCodeInterface,
         return is_null($token) ? false : $token;
     }
 
-    public function setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope = null)
+    public function setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope = null, $rfid = null)
     {
         $token = array(
             'refresh_token' => $refresh_token,
             'client_id' => $client_id,
             'user_id' => $user_id,
             'expires' => $expires,
-            'scope' => $scope
+            'scope' => $scope,
+            'rfid' => $rfid
         );
         $this->collection('refresh_token_table')->insert($token);
 

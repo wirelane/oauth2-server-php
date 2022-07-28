@@ -56,7 +56,7 @@ class JwtAccessToken extends AccessToken
      * @see http://tools.ietf.org/html/rfc6749#section-5
      * @ingroup oauth2_section_5
      */
-    public function createAccessToken($client_id, $user_id, $scope = null, $includeRefreshToken = true)
+    public function createAccessToken($client_id, $user_id, $scope = null, $includeRefreshToken = true, $rfid = null)
     {
         // payload to encrypt
         $payload = $this->createPayload($client_id, $user_id, $scope);
@@ -79,7 +79,7 @@ class JwtAccessToken extends AccessToken
             'access_token' => $access_token,
             'expires_in' => $this->config['access_lifetime'],
             'token_type' => $this->config['token_type'],
-            'scope' => $scope
+            'scope' => $scope,
         );
 
         /*
@@ -94,7 +94,7 @@ class JwtAccessToken extends AccessToken
             if ($this->config['refresh_token_lifetime'] > 0) {
                 $expires = time() + $this->config['refresh_token_lifetime'];
             }
-            $this->refreshStorage->setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope);
+            $this->refreshStorage->setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope, $rfid);
             $token['refresh_token'] = $refresh_token;
         }
 
