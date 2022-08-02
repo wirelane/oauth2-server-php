@@ -15,7 +15,7 @@ class RefreshToken implements GrantTypeInterface
     /**
      * @var array
      */
-    private $refreshToken;
+    protected $refreshToken;
 
     /**
      * @var RefreshTokenInterface
